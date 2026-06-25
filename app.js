@@ -168,7 +168,9 @@ bot.command('verify', async (ctx) => {
 // Spin up HTTP Server and launch Bot Engine
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Web server interface active on port :${PORT}`));
-
+app.get('/', (req, res) => {
+  res.send('🚀 Morgan Monetization Engine is running smoothly.');
+});
 bot.launch()
   .then(() => console.log('🤖 Morgan Monetization Bot Engine is online and polling!'))
   .catch((err) => console.error('Failed to boot Telegram engine:', err));
