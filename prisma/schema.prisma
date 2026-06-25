@@ -1,0 +1,32 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:/data/dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id         Int       @id @default(autoincrement())
+  telegramId BigInt    @unique @map("telegram_id")
+  username   String?
+  firstName  String?   @map("first_name")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  payments   Payment[]
+
+  @@map("users")
+}
+
+model Payment {
+  id             Int      @id @default(autoincrement())
+  txHash         String?  @unique @map("tx_hash")
+  userId         Int      @map("user_id")
+  user           User     @relation(fields: [userId], references: [id])
+  amountCrypto   Float    @map("amount_crypto")
+  cryptocurrency String   
+  status         String   
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  @@map("payments")
+}
