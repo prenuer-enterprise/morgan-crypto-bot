@@ -147,7 +147,7 @@ const generateInvoiceAction = (actionName, tierKey) => {
       `\`/verify ${tierKey.toLowerCase()} YOUR_TRANSACTION_HASH\``,
       { 
         parse_mode: 'Markdown',
-        ...Markup.inlineKeyboard([[Markup.button.callback('⬅️ Return to Backing Options', 'go_start')]])
+        ...Markup.inlineKeyboard([[Markup.button.callback('⬅️ Back to Main Menu', 'go_start')]])
       }
     );
   });
@@ -193,6 +193,11 @@ bot.command('verify', async (ctx) => {
     return ctx.reply('❌ Unmapped tier category type. Available options: bronze, silver, gold, vip_voice, vip_video, elite_booking.');
   }
 
+  // Length safety guard to ensure input is a true hash signature rather than short text typos
+  if (txHash.length < 10) {
+    return ctx.reply('❌ The transaction signature provided appears invalid. Please verify the hash and try again.');
+  }
+
   const validatedPrice = CAMPAIGN_CONFIG.TIERS[tierInput].price;
 
   try {
@@ -234,6 +239,8 @@ bot.command('admin', (ctx) => {
 // Spin up HTTP Server and launch Bot Engine
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Web server interface active on port :${PORT}`));
+
+// Landing endpoint to satisfy external monitoring loops
 app.get('/', (req, res) => {
   res.send('🚀 Automated Celebrity Management & Outreach Node is processing successfully.');
 });
