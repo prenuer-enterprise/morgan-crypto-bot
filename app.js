@@ -14,7 +14,7 @@ const CAMPAIGN_CONFIG = {
   SURVEY_HUB_URL: "https://fan-survey-hub.vercel.app/",
   LIVE_PORTAL_URL: "https://stilltheproblem-live.netlify.app/",
   DASHBOARD_URL: "https://stilltheproblem-live.netlify.app/dashboard.html",
-  USDT_TRC20_WALLET: "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t", // Master receipt wallet
+  USDT_TRC20_WALLET: "TLPbLN8nicjThG675JYD49xpk52MqbNSdj", // Master receipt wallet
   
   // Premium Management & Interactive Pricing Tiers
   TIERS: {
